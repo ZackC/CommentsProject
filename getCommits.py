@@ -1,3 +1,5 @@
+#This file extracts the commmit names from a git log output.
+
 import sys
 import re
 
