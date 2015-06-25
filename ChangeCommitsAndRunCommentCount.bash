@@ -1,9 +1,11 @@
 #!/bin/bash
 
-dirList=`ls -d -- */`
+#dirList=`ls -d -- */ | tail -n 78`
+dirList=`ls -d — */`
 for dir in ${dirList[@]}
 do
   cd $dir
+  echo "starting on $dir"
   echo "" > lineCount.txt
   git log > logResult.txt
   python ../../getCommits.py logResult.txt > commitList.txt

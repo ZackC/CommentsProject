@@ -37,11 +37,12 @@ def main(argv=None):
           if oldSourceLines != 0 and oldCommentCount != 0:
             commentRatio = float(commentCount)/float(oldCommentCount)
             sourceRatio = float(sourceLines)/float(oldSourceLines)
-            relativeChange = abs(commentRatio-sourceRatio)
-            if relativeChange > minChange:
+            #relativeChange = abs(commentRatio-sourceRatio)
+            relativeChange = commentRatio - sourceRatio
+            if relativeChange > minChange and commentCount - oldCommentCount > 50:
               print "change in: "+os.getcwd()+"/"+sys.argv[1]
               print "old comment count: "+str(oldCommentCount)+", new comment count: "+str(commentCount)+", old ratio: "+str(commentRatio)
-              print "new comment count: "+str(oldSourceLines)+", new source count: "+str(sourceLines)+", new ratio: "+str(sourceRatio)
+              print "old source count: "+str(oldSourceLines)+", new source count: "+str(sourceLines)+", new ratio: "+str(sourceRatio)
               print "total change: "+str(relativeChange)
               print "============================"
             #else:
