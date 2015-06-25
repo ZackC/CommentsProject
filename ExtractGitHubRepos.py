@@ -1,4 +1,7 @@
 #!/usr/bin/python
+
+#This program scrapes the github search results for java and prints the github clone link for the respositories
+
 from bs4 import BeautifulSoup
 import urllib2
 

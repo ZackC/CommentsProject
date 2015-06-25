@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#This program reads a list of git respositories and clones each respository in the #list in the current directory
+
 repoFile=../sampleRepos.txt
 rm -rf GitRepos
 mkdir GitRepos

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#This file runs the line counting program cloc on each git repository in the starting directory and outputs each repostitory's result to the file lineCount.txt in the main folder of the repository
+
 dirList=`ls -d -- */`
 for dir in ${dirList[@]}
 do

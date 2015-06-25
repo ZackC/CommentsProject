@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+#This script analyzes how source code lines, comment lines, and the relationship between the two change between each commit.
+
 import sys
 import re
 import os
