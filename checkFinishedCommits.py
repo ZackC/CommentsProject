@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+#This script counts the number of commits that have been processed and the total number of commits to process.  For some reason, the commit count is usually slightly higher than the processed count when all commits have been processed (something I should investigate further)
+
 def main(argv=None):
   flog = open("logResult.txt",'r')
   fline = open("lineCount.txt",'r')
