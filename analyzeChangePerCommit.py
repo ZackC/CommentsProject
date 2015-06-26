@@ -9,7 +9,7 @@ def main(argv=None):
   totalCommitList = []
   unfinishedDirList=["frameworks_base_disabled","intellij_community","platform_frameworks_base"]
   for dir in currentDirContents:
-    if os.path.isdir(dir) and dir not in unfinishedDirList::     
+    if os.path.isdir(dir) and dir not in unfinishedDirList:     
       fopen = open(dir+"/lineCount.txt")
       currentRepoList = []
       for line in fopen:
