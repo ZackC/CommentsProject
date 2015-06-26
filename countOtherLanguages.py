@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#This file reads the directory and counts which languages are used in projects along with the expected language: Java.  It also counts how many total files are used in each language.
+#This file reads the directory and counts which languages are used in projects along with the expected language: Java.  It also counts how many total files are used in each language. If a second parameter is included, then the program will output the language count of the first commit instead of the last commit.
 
 from operator import itemgetter
 
@@ -13,8 +13,14 @@ def main(argv=None):
   for dir in currentDirContents:
    if os.path.isdir(dir):
      fopen = open(dir+"/lineCount.txt")
-     for line in fopen:
-       if "Language" in line:
+     lastCommitLineCount = 0 #number of lines in the file to skip
+     if len(argv)==3:
+       for lineCount,line in enumerate(fopen):
+         if "Language" in line:
+           lastCommitLineCount = lineCount - 1
+       fopen.seek(0)
+     for lineCount,line in enumerate(fopen):
+       if lineCount > lastCommitLineCount and "Language" in line:
          fopen.next()
          currentLine = fopen.next()
          while "-----" not in currentLine:
