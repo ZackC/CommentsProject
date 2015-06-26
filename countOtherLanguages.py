@@ -6,6 +6,7 @@ from operator import itemgetter
 
 import os
 import re
+import sys
 
 def main(argv=None):
   currentDirContents = os.listdir('.')
@@ -42,4 +43,4 @@ def main(argv=None):
     print  " %s : %d repositories and %d files" % (lang,currentCounts[0],currentCounts[1])
 
 if __name__ == "__main__":
-  main()
+  main(sys.argv)
