@@ -15,7 +15,7 @@ def main(argv=None):
    if os.path.isdir(dir):
      fopen = open(dir+"/lineCount.txt")
      lastCommitLineCount = 0 #number of lines in the file to skip
-     if len(argv)==3:
+     if len(argv)>1:
        for lineCount,line in enumerate(fopen):
          if "Language" in line:
            lastCommitLineCount = lineCount - 1
