@@ -20,6 +20,7 @@ do
       firstCommit=$line
     fi
     git reset --hard $line
+    echo "current commit: $line" >> lineCount.txt
     ../../cloc-1.62.pl . >> lineCount.txt
     echo "=======================" >> lineCount.txt 
   done < commitList.txt
