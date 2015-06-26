@@ -7,8 +7,9 @@ import os
 def main(argv=None):
   currentDirContents = os.listdir('.')
   totalCommitList = []
+  unfinishedDirList=["frameworks_base_disabled","intellij_community","platform_frameworks_base"]
   for dir in currentDirContents:
-    if os.path.isdir(dir):
+    if os.path.isdir(dir) and dir not in unfinishedDirList::     
       fopen = open(dir+"/lineCount.txt")
       currentRepoList = []
       for line in fopen:
@@ -29,7 +30,10 @@ def main(argv=None):
         else:
           totalCommitList.append((commentCount,sourceCount,1))
   for commentCount,sourceCount, repoCount in totalCommitList:
-    print "%d, %d, %d, %.3f, %.3f" % (commentCount,sourceCount,repoCount,float(commentCount/repoCount),float(sourceCount/repoCount))
+    if repoCount > 9:
+      print "%d, %d, %d, %.3f, %.3f" % (commentCount,sourceCount,repoCount,float(commentCount/repoCount),float(sourceCount/repoCount))
+    else:
+      break
       
   
 if __name__ == "__main__":
