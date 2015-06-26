@@ -2,7 +2,7 @@
 
 #This file reads the directory and counts which languages are used in projects along with the expected language: Java.  It also counts how many total files are used in each language.
 
-
+from operator import itemgetter
 
 import os
 import re
@@ -32,7 +32,7 @@ def main(argv=None):
              languageDict[languageName] = (1,fileCount)
            currentLine = fopen.next()
          break
-  for lang,currentCounts in sorted(languageDict.items(), key=itemgetter(2), reverse=True):
+  for lang,currentCounts in sorted(languageDict.items(), key=itemgetter(1), reverse=True):
     print  " %s : %d repositories and %d files" % (lang,currentCounts[0],currentCounts[1])
 
 if __name__ == "__main__":
