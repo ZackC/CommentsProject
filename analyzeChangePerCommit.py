@@ -2,12 +2,14 @@
 
 #This file counts the average code and comment count repositories at different commits
 
+import os
+
 def main(argv=None):
   currentDirContents = os.listdir('.')
   totalCommitList = []
   unfinishedDirList=["frameworks_base_disabled","intellij_community","platform_frameworks_base"]
   for dir in currentDirContents:
-    if os.path.isdir(dir) and dir not in unfinishedDirList::     
+    if os.path.isdir(dir) and dir not in unfinishedDirList:     
       fopen = open(dir+"/lineCount.txt")
       currentRepoList = []
       for line in fopen:
@@ -18,11 +20,11 @@ def main(argv=None):
           commentLineCount = int(lineItems[3])
           sourceLineCount = int(lineItems[4])
           currentRepoList.append((commentLineCount,sourceLineCount))
-      for idx, commentCount, sourceCount in enumerate(reversed(currentRepoList)):
+      for idx, (commentCount, sourceCount) in enumerate(reversed(currentRepoList)):
         if idx < len(totalCommitList):
           oldTotals = totalCommitList[idx]
           newCommentTotal = commentCount + oldTotals[0]
-          newSourceTotal = soruceCount + oldTotals[1]
+          newSourceTotal = sourceCount + oldTotals[1]
           newRepoCount = 1 + oldTotals[2]
           totalCommitList[idx] = (newCommentTotal,newSourceTotal,newRepoCount)
         else:
