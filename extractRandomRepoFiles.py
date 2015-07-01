@@ -17,7 +17,7 @@ def main(argv=None):
     outputParentDir = argv[1]
     currentDirContents = os.listdir('.')
     originalPath = os.getcwd()
-    immediateChildDirectories = [x for x in currentDirContents if os.path.iddir(x)]
+    immediateChildDirectories = [x for x in currentDirContents if os.path.isdir(x)]
     childDirectoryCount = len(immediateChildDirectories)
     selectedDirs = random.sample(immediateChildDirectories, reposToExtractFrom)
     for aDir in selectedDirs:
