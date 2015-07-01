@@ -29,7 +29,7 @@ def main(argv=None):
         sys.exit("")
       os.chdir(currentDir)
       fileListInRepo = []
-      for (dirpath, dirnames, filenames) in walk(currentDir):
+      for (dirpath, dirnames, filenames) in os.walk(currentDir):
         filenames = [os.path.join(dirpath,theFile) for theFile in filenames]
         fileListInRepo.extend(filenames)
       selectedFiles = random.sample(fileListInRepo,filesToExtract)
