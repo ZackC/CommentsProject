@@ -36,7 +36,7 @@ def main(argv=None):
       for aFile in selectedFiles:
         fileBasename = os.path.basename(aFile)
         fileDestination = os.path.join(outputFolder,fileBasename)
-        copyfile(aFile,fileDestination)
+        shutil.copyfile(aFile,fileDestination)
 
 if __name__ == "__main__":
   main(sys.argv)
