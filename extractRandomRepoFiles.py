@@ -7,8 +7,8 @@ import random
 import sys
 import shutil
 
-reposToExtractFrom = 10
-filesToExtract = 10
+repoCountToExtractFrom = 10
+fileCountToExtract = 10
 
 def main(argv=None):
   if len(argv) != 2 or not os.path.isdir(argv[1]):
@@ -19,7 +19,7 @@ def main(argv=None):
     originalPath = os.getcwd()
     immediateChildDirectories = [x for x in currentDirContents if os.path.isdir(x)]
     childDirectoryCount = len(immediateChildDirectories)
-    selectedDirs = random.sample(immediateChildDirectories, reposToExtractFrom)
+    selectedDirs = random.sample(immediateChildDirectories, repoCountToExtractFrom)
     for aDir in selectedDirs:
       outputFolder = os.path.join(outputParentDir,aDir)
       os.makedirs(outputFolder)
@@ -32,9 +32,8 @@ def main(argv=None):
       for (dirpath, dirnames, filenames) in os.walk(currentDir):
         filenames = [os.path.join(dirpath,theFile) for theFile in filenames]
         fileListInRepo.extend(filenames)
-      fileListInRepo = [x for x in fileListInRepo if "." in x]
-      fileListInRepo = [x for x in fileListInRepo if not x.endswith(".txt")]
-      selectedFiles = random.sample(fileListInRepo,filesToExtract)
+      fileListInRepo = [x for x in fileListInRepo if "." in x and not x.endswith(".txt") and not x.endswith(".jar")]
+      selectedFiles = random.sample(fileListInRepo,fileCountToExtract)
       for aFile in selectedFiles:
         fileBasename = os.path.basename(aFile)
         fileDestination = os.path.join(outputFolder,fileBasename)
