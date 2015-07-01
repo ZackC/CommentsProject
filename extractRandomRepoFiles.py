@@ -32,6 +32,8 @@ def main(argv=None):
       for (dirpath, dirnames, filenames) in os.walk(currentDir):
         filenames = [os.path.join(dirpath,theFile) for theFile in filenames]
         fileListInRepo.extend(filenames)
+      fileListInRepo = [x for x in fileListInRepo if "." in x]
+      fileListInRepo = [x for x in fileListInRepo if not x.endswith(".txt")]
       selectedFiles = random.sample(fileListInRepo,filesToExtract)
       for aFile in selectedFiles:
         fileBasename = os.path.basename(aFile)
