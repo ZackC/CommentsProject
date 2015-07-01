@@ -17,13 +17,12 @@ def main(argv=None):
     outputParentDir = argv[1]
     currentDirContents = os.listdir('.')
     originalPath = os.getcwd()
-
-    os.makedirs(outputFolder)
     immediateChildDirectories = [x for x in currentDirContents if os.path.iddir(x)]
     childDirectoryCount = len(immediateChildDirectories)
     selectedDirs = random.sample(immediateChildDirectories, reposToExtractFrom)
     for aDir in selectedDirs:
       outputFolder = os.path.join(outputParentDir,aDir)
+      os.makedirs(outputFolder)
       currentDir = os.path.join(originalPath,aDir)
       if not os.path.isdir(argv[1]):
         print "%s is not a path!\n" % currentDir
