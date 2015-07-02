@@ -8,8 +8,8 @@ import sys
 repoCountToExtractFrom = 30
 
 def main(argv=None):
-    if len(argv) != 2 or not os.path.isdir(argv[1]):
-      print "ouput directory is required.\nUsage: ./analyzeChangePerCommitPerRepo.py outputDir"
+  if len(argv) != 2 or not os.path.isdir(argv[1]):
+    print "ouput directory is required.\nUsage: ./analyzeChangePerCommitPerRepo.py outputDir"
   else:
     outputDir = argv[1]
     unfinishedDirList=["frameworks_base_disabled","intellij_community","platform_frameworks_base"]
