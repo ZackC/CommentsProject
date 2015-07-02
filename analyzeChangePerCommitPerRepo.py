@@ -6,7 +6,7 @@ import os
 import sys
 import random
 
-repoCountToExtractFrom = 30
+repoCountToExtractFrom = 100
 
 def main(argv=None):
   if len(argv) != 2 or not os.path.isdir(argv[1]):
