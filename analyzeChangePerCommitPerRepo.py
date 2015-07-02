@@ -33,7 +33,7 @@ def main(argv=None):
       outputFile = os.path.join(outputDir,dir+".txt")
       fout = open(outputFile,'w')
       for idx, (commentCount, sourceCount) in enumerate(reversed(currentRepoList)):
-        fout.write("%d, %d" % (commentCount,sourceCount)) #need to change this to write to file
+        fout.write("%d, %d\n" % (commentCount,sourceCount)) #need to change this to write to file
       fout.close()
   
 if __name__ == "__main__":
