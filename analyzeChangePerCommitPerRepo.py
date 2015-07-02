@@ -30,7 +30,7 @@ def main(argv=None):
           commentLineCount = int(lineItems[3])
           sourceLineCount = int(lineItems[4])
           currentRepoList.append((commentLineCount,sourceLineCount))
-      outputFile = outputDir+os.path.separator + dir + ".txt"
+      outputFile = os.path.join(outputDir,dir,".txt")
       fout = open(outputFile,'w')
       for idx, (commentCount, sourceCount) in enumerate(reversed(currentRepoList)):
         fout.write("%d, %d" % (commentCount,sourceCount)) #need to change this to write to file
