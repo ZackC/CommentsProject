@@ -30,17 +30,21 @@ def main(argv=None):
            currentLineContents = re.split(r'\s{2,}', currentLine)
            languageName = currentLineContents[0]
            fileCount = int(currentLineContents[1])
+           commentLineCount = int(currentLineContents[3])
+           sourceLineCount = int(currentLineContents[4])
            if languageName in languageDict:
             oldContents = languageDict[languageName]
             newRepositoryCount = 1 + oldContents[0]
             newFileCount = fileCount + oldContents[1]
-            languageDict[languageName] = (newRepositoryCount, newFileCount)
+            newCommentLineCount = commentLineCount + oldContents[2]
+            newSourceLineCount = sourceLineCount + oldContents[3]
+            languageDict[languageName] = (newRepositoryCount, newFileCount, newCommentLineCount, newSourceLineCount)
            else:
-             languageDict[languageName] = (1,fileCount)
+             languageDict[languageName] = (1,fileCount,commentLineCount,sourceLineCount)
            currentLine = fopen.next()
          break
   for lang,currentCounts in sorted(languageDict.items(), key=itemgetter(1), reverse=True):
-    print  " %s : %d repositories and %d files" % (lang,currentCounts[0],currentCounts[1])
+    print  " %s : %d repositories and %d files; %d comment lines and %d source code lines" % (lang,currentCounts[0],currentCounts[1],currentCounts[2],currentCounts[3])
 
 if __name__ == "__main__":
   main(sys.argv)
