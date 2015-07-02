@@ -34,7 +34,7 @@ def main(argv=None):
       fout = open(outputFile,'w')
       for idx, (commentCount, sourceCount) in enumerate(reversed(currentRepoList)):
         fout.write("%d, %d" % (commentCount,sourceCount)) #need to change this to write to file
-      f.close()
+      fout.close()
   
 if __name__ == "__main__":
   main(sys.argv)
