@@ -24,7 +24,7 @@ def main(argv=None):
           sourceLineCount = int(lineItems[4])
           currentRepoList.append((commentLineCount,sourceLineCount))
       currentRepoList = currentRepoList.reverse()
-      for idx, (oldCommentCount, oldSourceCount) in enumerate(currentRepoList[:-1:]):
+      for idx, (oldCommentCount, oldSourceCount) in enumerate(currentRepoList[:-1]):
         newCommentCount= currentRepoList[idx+1][3]
         newSourceCount = currentRepoList[idx+1][4]
         if isImportantCommit(oldCommentCount,oldSourceCount,newCommentCount,newSourceCount):
