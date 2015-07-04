@@ -26,8 +26,8 @@ def main(argv=None):
       if len(currentRepoList) > 1:
         currentRepoList.reverse()
         for idx, (oldCommentCount, oldSourceCount) in enumerate(currentRepoList[:-1]):
-          newCommentCount= currentRepoList[idx+1][3]
-          newSourceCount = currentRepoList[idx+1][4]
+          newCommentCount= currentRepoList[idx+1][0]
+          newSourceCount = currentRepoList[idx+1][1]
           if isImportantCommit(oldCommentCount,oldSourceCount,newCommentCount,newSourceCount):
             if aDir in countDict:
               countDict[aDir]= countDict[aDir] + 1
