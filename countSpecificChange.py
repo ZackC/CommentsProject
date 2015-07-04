@@ -16,7 +16,7 @@ def main(argv=None):
     for aDir in immediateChildDirectories:
       fopen = open(aDir+"/lineCount.txt")
       currentRepoList = []
-      for line in fin:
+      for line in fopen:
         if line.startswith("SUM:"):
           lineItems = re.split(r'\s{2,}', line)
           #print "items in line"
