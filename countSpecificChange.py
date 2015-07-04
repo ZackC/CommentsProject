@@ -23,15 +23,16 @@ def main(argv=None):
           commentLineCount = int(lineItems[3])
           sourceLineCount = int(lineItems[4])
           currentRepoList.append((commentLineCount,sourceLineCount))
-      currentRepoList = currentRepoList.reverse()
-      for idx, (oldCommentCount, oldSourceCount) in enumerate(currentRepoList[:-1]):
-        newCommentCount= currentRepoList[idx+1][3]
-        newSourceCount = currentRepoList[idx+1][4]
-        if isImportantCommit(oldCommentCount,oldSourceCount,newCommentCount,newSourceCount):
-          if aDir in countDict:
-            countDict[aDir]= countDict[aDir] + 1
-          else:
-            countDict[aDir] = 1
+      if len(currentRepoList) > 1:
+        currentRepoList = currentRepoList.reverse()
+        for idx, (oldCommentCount, oldSourceCount) in enumerate(currentRepoList[:-1]):
+          newCommentCount= currentRepoList[idx+1][3]
+          newSourceCount = currentRepoList[idx+1][4]
+          if isImportantCommit(oldCommentCount,oldSourceCount,newCommentCount,newSourceCount):
+            if aDir in countDict:
+              countDict[aDir]= countDict[aDir] + 1
+            else:
+              countDict[aDir] = 1
     total = 0
     for aDir,dirCount in countDict:
       total = total + dirCount
