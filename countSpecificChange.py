@@ -14,7 +14,7 @@ def main(argv=None):
     immediateChildDirectories = [x for x in currentDirContents if os.path.isdir(x)]
     countDict = {}
     for aDir in immediateChildDirectories:
-      fopen = open(dir+"/lineCount.txt")
+      fopen = open(aDir+"/lineCount.txt")
       currentRepoList = []
       for line in fin:
         if line.startswith("SUM:"):
