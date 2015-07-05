@@ -6,6 +6,10 @@ import sys
 import re
 import os
 
+totalCommentChange = 0
+totalSourceChange = 0
+commitCount = 0
+
 def main(argv=None):
  
   
@@ -38,10 +42,19 @@ def main(argv=None):
       total = total + dirCount
       print "Count for %s: %d" % (aDir,dirCount)
     print "Total Count: %d" % (total)
+    averageCommentChange = float(totalCommentChange)/float(commitCount)
+    averageSourceChange = float(totalSourceChange)/float(commitCount)
+    print "Average Change - comments: %d, source: %d" % (averageCommentCount,averageSourceChange)
         
 def isImportantCommit(oldCommentLineCount,oldSourceLineCount,newCommentLineCount,newSourceLineCount):
    commentChange = newCommentLineCount - oldCommentLineCount
    sourceChange = newSourceLineCount - oldSourceLineCount
+   global totalCommentChange
+   global totalSourceChange
+   global commitCount
+   totalCommentChange = totalCommentChange + commentChange
+   totalSourceChange = totalSourceChange + sourceChange
+   commitCount = commitCount + 1
    print "commentChange: %d, sourceChange: %d" % (commentChange, sourceChange) 
    if(sourceChange > 0 and commentChange > 50 and float(commentChange)/float(sourceChange)>2):
      True
