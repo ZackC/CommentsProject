@@ -44,7 +44,7 @@ def main(argv=None):
     print "Total Count: %d" % (total)
     averageCommentChange = float(totalCommentChange)/float(commitCount)
     averageSourceChange = float(totalSourceChange)/float(commitCount)
-    print "Average Change - comments: %d, source: %d" % (averageCommentCount,averageSourceChange)
+    print "Average Change - comments: %d, source: %d" % (averageCommentChange,averageSourceChange)
         
 def isImportantCommit(oldCommentLineCount,oldSourceLineCount,newCommentLineCount,newSourceLineCount):
    commentChange = newCommentLineCount - oldCommentLineCount
