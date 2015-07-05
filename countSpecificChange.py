@@ -42,7 +42,7 @@ def main(argv=None):
 def isImportantCommit(oldCommentLineCount,oldSourceLineCount,newCommentLineCount,newSourceLineCount):
    commentChange = newCommentLineCount - oldCommentLineCount
    sourceChange = newSourceLineCount - oldSourceLineCount
-   if(sourceChange > 49 and float(commentChange)/float(sourceChange)>2):
+   if(sourceChange > 0 and commentChange > 50 and float(commentChange)/float(sourceChange)>2):
      True
    else:
      False
