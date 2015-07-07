@@ -44,9 +44,9 @@ def main(argv=None):
            currentLine = fopen.next()
          break
   for lang,currentCounts in sorted(languageDict.items(), key=itemgetter(1), reverse=True):
-    commentPercent = float(currentCounts[0])/float(currentCounts[0]+currentCounts[1]) * 100
-    sourcePercent = float(currentCounts[1])/float(currentCounts[0]+currentCounts[1]) * 100
-    print  " %s : %d repositories and %d files; %d comment lines (%.2f) and %d source code lines(%.2f)" % (lang,currentCounts[0],currentCounts[1],currentCounts[2],currentCounts[3],commentPercent,sourcePercent)
+    commentPercent = float(currentCounts[2])/float(currentCounts[2]+currentCounts[3]) * 100
+    sourcePercent = float(currentCounts[3])/float(currentCounts[2]+currentCounts[3]) * 100
+    print  " %s : %d repositories and %d files; %d comment lines (%.2f) and %d source code lines(%.2f)" % (lang,currentCounts[0],currentCounts[1],currentCounts[2],commentPercent,currentCounts[3],sourcePercent)
 
 if __name__ == "__main__":
   main(sys.argv)
