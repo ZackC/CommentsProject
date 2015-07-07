@@ -42,7 +42,7 @@ def main(argv=None):
     for aDir,dirCount in countDict.iteritems():
       total = total + dirCount
       print "Count for %s: %d" % (aDir,dirCount)
-    print "Total Count: %d" % (total)
+    print "Totals- Repo Count: %d, Commit count: %d" % (len(countDict),total)
     averageCommentChange = float(totalCommentChange)/float(commitCount)
     averageSourceChange = float(totalSourceChange)/float(commitCount)
     print "Average Change - comments: %d, source: %d" % (averageCommentChange,averageSourceChange)
@@ -56,7 +56,7 @@ def isImportantCommit(oldCommentLineCount,oldSourceLineCount,newCommentLineCount
    totalCommentChange = totalCommentChange + commentChange
    totalSourceChange = totalSourceChange + sourceChange
    commitCount = commitCount + 1
-   print "commentChange: %d, sourceChange: %d" % (commentChange, sourceChange) 
+   #print "commentChange: %d, sourceChange: %d" % (commentChange, sourceChange) 
    #if commentChange!=0 and sourceChange !=0:
    #   print "sourceChange > 0: %r" % (sourceChange>0)
    #   print "commentChange > 50: %r" % (commentChange > 50)
