@@ -33,7 +33,7 @@ def main(argv=None):
           newCommentCount= currentRepoList[idx+1][0]
           newSourceCount = currentRepoList[idx+1][1]
           if isImportantCommit(oldCommentCount,oldSourceCount,newCommentCount,newSourceCount):
-            print "returned True!!!"
+            #print "returned True!!!"
             if aDir in countDict:
               countDict[aDir]= countDict[aDir] + 1
             else:
@@ -57,16 +57,16 @@ def isImportantCommit(oldCommentLineCount,oldSourceLineCount,newCommentLineCount
    totalSourceChange = totalSourceChange + sourceChange
    commitCount = commitCount + 1
    print "commentChange: %d, sourceChange: %d" % (commentChange, sourceChange) 
-   if commentChange!=0 and sourceChange !=0:
-      print "sourceChange > 0: %r" % (sourceChange>0)
-      print "commentChange > 50: %r" % (commentChange > 50)
-      print "float(commentChange)/float(sourceChange)>2):  %r" % (float(commentChange)/float(sourceChange)>2)
+   #if commentChange!=0 and sourceChange !=0:
+   #   print "sourceChange > 0: %r" % (sourceChange>0)
+   #   print "commentChange > 50: %r" % (commentChange > 50)
+   #   print "float(commentChange)/float(sourceChange)>2):  %r" % (float(commentChange)/float(sourceChange)>2)
    if(sourceChange > 0 and commentChange > 50 and float(commentChange)/float(sourceChange)>2):
-     print "returning true"
-     True
+     #print "returning true"
+     return True
    else:
-     print "returning false"
-     False
+     #print "returning false"
+     return False
 
 if __name__ == "__main__":
   main()    
