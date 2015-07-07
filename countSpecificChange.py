@@ -33,6 +33,7 @@ def main(argv=None):
           newCommentCount= currentRepoList[idx+1][0]
           newSourceCount = currentRepoList[idx+1][1]
           if isImportantCommit(oldCommentCount,oldSourceCount,newCommentCount,newSourceCount):
+            print "returned True!!!"
             if aDir in countDict:
               countDict[aDir]= countDict[aDir] + 1
             else:
