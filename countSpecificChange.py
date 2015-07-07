@@ -62,8 +62,10 @@ def isImportantCommit(oldCommentLineCount,oldSourceLineCount,newCommentLineCount
       print "commentChange > 50: %r" % (commentChange > 50)
       print "float(commentChange)/float(sourceChange)>2):  %r" % (float(commentChange)/float(sourceChange)>2)
    if(sourceChange > 0 and commentChange > 50 and float(commentChange)/float(sourceChange)>2):
+     print "returning true"
      True
    else:
+     print "returning false"
      False
 
 if __name__ == "__main__":
