@@ -39,7 +39,7 @@ def main(argv=None):
             else:
               countDict[aDir] = 1
     total = 0
-    for aDir,dirCount in countDict:
+    for aDir,dirCount in countDict.iteritems():
       total = total + dirCount
       print "Count for %s: %d" % (aDir,dirCount)
     print "Total Count: %d" % (total)
