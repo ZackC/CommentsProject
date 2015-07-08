@@ -17,7 +17,7 @@ def findCommit(repositoryName,commentCountForCommit,sourceCountForCommit,
 commentCountBeforeCommit,sourceCountBeforeCommit):
   startingDir = os.getcwd()
   os.chdir(repositoryName)
-  print "current directory: %s" % (os.getcwd())
+  #print "current directory: %s" % (os.getcwd())
   commitList,matchingLines = buildCommitList(commentCountForCommit,sourceCountForCommit)
   os.chdir(startingDir)
   if len(matchingLines) == 0:
