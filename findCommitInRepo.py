@@ -36,7 +36,7 @@ def buildCommitList(commentCountForCommit,sourceCountForCommit):
   matchingLines = []
   count = 0
   for commitHash in fin:
-    if firstCommit = "":
+    if firstCommit == "":
       firstCommit = commitHash
     print "current commit: %s" % (commitHash)
     subprocess.call("git","reset","--hard",commitHash)
