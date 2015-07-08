@@ -58,7 +58,7 @@ def buildCommitList(commentCountForCommit,sourceCountForCommit):
         if commentCount == commentCountForCommmit and sourceCount == sourceCountForCommit:
           matchingLines.append(count)
         count = count + 1
-  subprocess.check_output(["git","reset","--hard",firstCommit,">","/dev/null"])  
+  subprocess.check_output(["git","reset","--hard",firstCommit])  
   return commitList
 
 if __name__ == "__main__":
