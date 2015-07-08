@@ -39,6 +39,7 @@ def buildCommitList(commentCountForCommit,sourceCountForCommit):
   matchingLines = []
   count = 0
   for commitHash in fin:
+    commitHash = commitHash.rstrip()
     if firstCommit == "":
       firstCommit = commitHash
     print "current commit: %s" % (commitHash)
