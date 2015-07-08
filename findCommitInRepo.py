@@ -47,6 +47,7 @@ def buildCommitList(commentCountForCommit,sourceCountForCommit):
     subprocess.call(["git","reset","--hard",commitHash])
     clocOutputByteString = subprocess.check_output(["../../cloc-1.62.pl","."])
     clocOutput = clocOutputByteString.decode(encoding='ascii',errors='strict')
+    print clocOutput
     for line in clocOutput:
       if line.startswith("SUM:"):
         currentLineContents = re.split(r'\s{2,}', currentLine)
