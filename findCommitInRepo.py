@@ -44,7 +44,7 @@ def buildCommitList(commentCountForCommit,sourceCountForCommit):
       firstCommit = commitHash
     #print "current commit: %s" % (commitHash)
     #print ["git","reset","--hard",commitHash]
-    subprocess.call(["git","reset","--hard",commitHash,">","/dev/null"])
+    subprocess.check_output(["git","reset","--hard",commitHash])
     clocOutputByteString = subprocess.check_output(["../../cloc-1.62.pl","."])
     clocOutput = clocOutputByteString.decode(encoding='ascii',errors='strict')
     #print clocOutput
@@ -58,7 +58,7 @@ def buildCommitList(commentCountForCommit,sourceCountForCommit):
         if commentCount == commentCountForCommmit and sourceCount == sourceCountForCommit:
           matchingLines.append(count)
         count = count + 1
-  subprocess.call(["git","reset","--hard",firstCommit,">","/dev/null"])  
+  subprocess.check_output(["git","reset","--hard",firstCommit,">","/dev/null"])  
   return commitList
 
 if __name__ == "__main__":
