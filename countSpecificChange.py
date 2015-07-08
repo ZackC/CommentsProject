@@ -8,6 +8,7 @@ import sys
 import re
 import os
 import findCommitInRepo
+import datetime
 
 totalCommentChange = 0
 totalSourceChange = 0
@@ -36,6 +37,8 @@ def main(argv=None):
           newSourceCount = currentRepoList[idx+1][1]
           if isImportantCommit(oldCommentCount,oldSourceCount,newCommentCount,newSourceCount):
             if printImportantCommits:
+               print "found important commit" #this is temporary
+               print datetime.datetime.now().time()
                findCommitInRepo.findCommit(aDir,newCommentCount,newSourceCount,oldCommentCount,oldSourceCount):
             else: 
             #print "returned True!!!"
