@@ -39,8 +39,8 @@ def buildCommitList(commentCountForCommit,sourceCountForCommit):
     if firstCommit == "":
       firstCommit = commitHash
     print "current commit: %s" % (commitHash)
-    subprocess.call("git","reset","--hard",commitHash)
-    clocOutputByteString = subprocess.check_output("../../cloc-1.62.pl",".",)
+    subprocess.call(["git","reset","--hard",commitHash])
+    clocOutputByteString = subprocess.check_output(["../../cloc-1.62.pl","."])
     clocOutput = clocOutputByteString.decode(encoding='ascii',errors='strict')
     for line in clocOutput:
       if line.startswith("SUM:"):
@@ -52,7 +52,7 @@ def buildCommitList(commentCountForCommit,sourceCountForCommit):
         if commentCount == commentCountForCommmit and sourceCount == sourceCountForCommit:
           matchingLines.append(count)
         count = count + 1
-  subprocess.call("git","reset","--hard",firstCommit)  
+  subprocess.call(["git","reset","--hard",firstCommit])  
   return commitList
 
 if __name__ == "__main__":
