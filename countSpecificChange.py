@@ -39,7 +39,7 @@ def main(argv=None):
             if printImportantCommits:
                print "found important commit" #this is temporary
                print datetime.datetime.now().time()
-               findCommitInRepo.findCommit(aDir,newCommentCount,newSourceCount,oldCommentCount,oldSourceCount):
+               findCommitInRepo.findCommit(aDir,newCommentCount,newSourceCount,oldCommentCount,oldSourceCount)
             else: 
             #print "returned True!!!"
               if aDir in countDict:
