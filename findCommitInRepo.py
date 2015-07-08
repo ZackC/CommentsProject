@@ -42,12 +42,12 @@ def buildCommitList(commentCountForCommit,sourceCountForCommit):
     commitHash = commitHash.rstrip()
     if firstCommit == "":
       firstCommit = commitHash
-    print "current commit: %s" % (commitHash)
-    print ["git","reset","--hard",commitHash]
-    subprocess.call(["git","reset","--hard",commitHash])
+    #print "current commit: %s" % (commitHash)
+    #print ["git","reset","--hard",commitHash]
+    subprocess.call(["git","reset","--hard",commitHash,">","/dev/null"])
     clocOutputByteString = subprocess.check_output(["../../cloc-1.62.pl","."])
     clocOutput = clocOutputByteString.decode(encoding='ascii',errors='strict')
-    print clocOutput
+    #print clocOutput
     for line in clocOutput:
       if line.startswith("SUM:"):
         currentLineContents = re.split(r'\s{2,}', currentLine)
@@ -58,7 +58,7 @@ def buildCommitList(commentCountForCommit,sourceCountForCommit):
         if commentCount == commentCountForCommmit and sourceCount == sourceCountForCommit:
           matchingLines.append(count)
         count = count + 1
-  subprocess.call(["git","reset","--hard",firstCommit])  
+  subprocess.call(["git","reset","--hard",firstCommit,">","/dev/null"])  
   return commitList
 
 if __name__ == "__main__":
