@@ -42,6 +42,7 @@ def buildCommitList(commentCountForCommit,sourceCountForCommit):
     if firstCommit == "":
       firstCommit = commitHash
     print "current commit: %s" % (commitHash)
+    print ["git","reset","--hard",commitHash]
     subprocess.call(["git","reset","--hard",commitHash])
     clocOutputByteString = subprocess.check_output(["../../cloc-1.62.pl","."])
     clocOutput = clocOutputByteString.decode(encoding='ascii',errors='strict')
