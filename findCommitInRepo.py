@@ -15,8 +15,11 @@ def main(argv=None):
      
 def findCommit(repositoryName,commentCountForCommit,sourceCountForCommit,
 commentCountBeforeCommit,sourceCountBeforeCommit):
+  startingDir = os.getcwd()
   os.chdir(repositoryName)
+  print "current directory: %s" % (os.getcwd())
   commitList,matchingLines = buildCommitList(commentCountForCommit,sourceCountForCommit)
+  os.chdir(startingDir)
   if len(matchingLines) == 0:
     print "Error.  Did not find the specific commit"
   elif len(matchingLines) == 1:
@@ -27,7 +30,7 @@ commentCountBeforeCommit,sourceCountBeforeCommit):
       if commitToCheck[1] == commentCountBeforeCommit and commitToCheck[2] == sourceCountBeforeCommit:
         print "the commit is: %s in %s" % (commitList[match][0],repositoryName)
         break      
-  os.chdir("..")
+  
 
 def buildCommitList(commentCountForCommit,sourceCountForCommit):
   fin = open("commitList.txt",'r')
