@@ -30,7 +30,7 @@ commentCountBeforeCommit,sourceCountBeforeCommit):
   os.chdir("..")
 
 def buildCommitList(commentCountForCommit,sourceCountForCommit):
-  fin = open("logResult.txt",'r')
+  fin = open("commitList.txt",'r')
   firstCommit = ""
   commitList = []
   matchingLines = []
