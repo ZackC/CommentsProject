@@ -2,17 +2,19 @@
 
 #This script counts how many times a comment and source code line relation occurs in individual repositories and in total
 
+#if a second arguements is provided, the script will print out which commits contain the importantCommits instead of a count
+
 import sys
 import re
 import os
+import findCommitInRepo
 
 totalCommentChange = 0
 totalSourceChange = 0
 commitCount = 0
 
 def main(argv=None):
- 
-  
+    printImportantCommits = (len(argv)==2) 
     currentDirContents = os.listdir('.')
     originalPath = os.getcwd()
     immediateChildDirectories = [x for x in currentDirContents if os.path.isdir(x)]
@@ -33,19 +35,23 @@ def main(argv=None):
           newCommentCount= currentRepoList[idx+1][0]
           newSourceCount = currentRepoList[idx+1][1]
           if isImportantCommit(oldCommentCount,oldSourceCount,newCommentCount,newSourceCount):
+            if printImportantCommits:
+               findCommitInRepo.findCommit(aDir,newCommentCount,newSourceCount,oldCommentCount,oldSourceCount):
+            else: 
             #print "returned True!!!"
-            if aDir in countDict:
-              countDict[aDir]= countDict[aDir] + 1
-            else:
-              countDict[aDir] = 1
-    total = 0
-    for aDir,dirCount in countDict.iteritems():
-      total = total + dirCount
-      print "Count for %s: %d" % (aDir,dirCount)
-    print "Totals- Repo Count: %d, Commit count: %d" % (len(countDict),total)
-    averageCommentChange = float(totalCommentChange)/float(commitCount)
-    averageSourceChange = float(totalSourceChange)/float(commitCount)
-    print "Average Change - comments: %d, source: %d" % (averageCommentChange,averageSourceChange)
+              if aDir in countDict:
+                countDict[aDir]= countDict[aDir] + 1
+              else:
+                countDict[aDir] = 1
+    if not printImportantCommits:
+      total = 0
+      for aDir,dirCount in countDict.iteritems():
+        total = total + dirCount
+        print "Count for %s: %d" % (aDir,dirCount)
+      print "Totals- Repo Count: %d, Commit count: %d" % (len(countDict),total)
+      averageCommentChange = float(totalCommentChange)/float(commitCount)
+      averageSourceChange = float(totalSourceChange)/float(commitCount)
+      print "Average Change - comments: %d, source: %d" % (averageCommentChange,averageSourceChange)
         
 def isImportantCommit(oldCommentLineCount,oldSourceLineCount,newCommentLineCount,newSourceLineCount):
    commentChange = newCommentLineCount - oldCommentLineCount
@@ -69,6 +75,6 @@ def isImportantCommit(oldCommentLineCount,oldSourceLineCount,newCommentLineCount
      return False
 
 if __name__ == "__main__":
-  main()    
+  main(sys.argv)    
 
 

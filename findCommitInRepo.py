@@ -9,24 +9,25 @@ def main(argv=None):
   repositoryName = input('repository name:' )
   commentCountForCommit = input('comment lines: ')
   sourceCountForCommit = input('source lines: ')
+  commentCountBeforeCommit = input('previous comment lines: ')
+  sourceCountBeforeCommit = input('previous source lines: ') 
   
      
-def findCommit(repositoryName,commentCountForCommit,sourceCountForCommit):
+def findCommit(repositoryName,commentCountForCommit,sourceCountForCommit,
+commentCountBeforeCommit,sourceCountBeforeCommit):
   os.chdir(repositoryName)
   commitList,matchingLines = buildCommitList(commentCountForCommit,sourceCountForCommit)
   if len(matchingLines) == 0:
     print "Error.  Did not find the specific commit"
   elif len(matchingLines) == 1:
     print "the commit is: %s" % (commitList[matchingLines[0]][0])
-  else:
-    commentCountBeforeCommit = input('previous comment lines: ')
-    sourceCountBeforeCommit = input('previous source lines: ')  
+  else:   
     for match in matchingLines:
       commitToCheck = commitList[match-1]
       if commitToCheck[1] == commentCountBeforeCommit and commitToCheck[2] == sourceCountBeforeCommit:
-        print "the commit is: %s" % (commitList[match][0])
+        print "the commit is: %s in %s" % (commitList[match][0],repositoryName)
         break      
-  
+  os.chdir("..")
 
 def buildCommitList(commentCountForCommit,sourceCountForCommit):
   fin = open("logResult.txt",'r')
