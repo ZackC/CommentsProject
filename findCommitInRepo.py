@@ -44,21 +44,24 @@ def buildCommitList(commentCountForCommit,sourceCountForCommit):
       firstCommit = commitHash
     #print "current commit: %s" % (commitHash)
     #print ["git","reset","--hard",commitHash]
-    subprocess.check_output(["git","reset","--hard",commitHash])
-    clocOutputByteString = subprocess.check_output(["../../cloc-1.62.pl","."])
-    clocOutput = clocOutputByteString.decode(encoding='ascii',errors='strict')
-    #print clocOutput
-    for line in clocOutput:
-      if line.startswith("SUM:"):
-        currentLineContents = re.split(r'\s{2,}', currentLine)
-        #print "items in line"
-        commentCount = int(currentLineContents[3])
-        sourceCount = int(currentLineContents[4])
-        commitList.append((commitHash,commentCount,sourceCount))
-        if commentCount == commentCountForCommmit and sourceCount == sourceCountForCommit:
-          matchingLines.append(count)
-        count = count + 1
-  subprocess.check_output(["git","reset","--hard",firstCommit])  
+    try:
+      subprocess.check_output(["git","reset","--hard",commitHash])
+      clocOutputByteString = subprocess.check_output(["../../cloc-1.62.pl","."])
+      clocOutput = clocOutputByteString.decode(encoding='ascii',errors='strict')
+      #print clocOutput
+      for line in clocOutput:
+        if line.startswith("SUM:"):
+          currentLineContents = re.split(r'\s{2,}', currentLine)
+          #print "items in line"
+          commentCount = int(currentLineContents[3])
+          sourceCount = int(currentLineContents[4])
+          commitList.append((commitHash,commentCount,sourceCount))
+          if commentCount == commentCountForCommmit and sourceCount == sourceCountForCommit:
+            matchingLines.append(count)
+          count = count + 1
+    except subprocess.CalledProcessError:
+      pass
+    subprocess.check_output(["git","reset","--hard",firstCommit])  
   return commitList
 
 if __name__ == "__main__":
