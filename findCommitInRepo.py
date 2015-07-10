@@ -18,7 +18,29 @@ commentCountBeforeCommit,sourceCountBeforeCommit):
   startingDir = os.getcwd()
   os.chdir(repositoryName)
   #print "current directory: %s" % (os.getcwd())
-  commitList,matchingLines = buildCommitList(commentCountForCommit,sourceCountForCommit)
+  commentSourceList = buildCommentSourceCountList()
+  targetCommitIndex = commentSourceList.index((commentCountForCommit,sourceCountForCommit))
+  commitList = buildCommitList(commentCountForCommit,sourceCountForCommit)
+  foundCommit = False
+  minIndex = 0
+  maxIndex = len(commitList)
+  currentIndex = targetCommitInde
+  while not foundCommit:
+     hashToCheck = commitList[currentIndex]
+     countsResult = getCountsForCommit(hashToCheck)
+     if countsResult == None:
+       currentIndex = currentIndex + 1 #loop again with index incremented
+     else:
+       (commentLineCountForTestedCommit,sourceLineCountForTestedCommit) = countsResult
+       if commentCountForCommit == commentLineCountForTestedCommit and sourceCountForCommit == sourceLineCountForTestedCommit:
+         hashToCheck2 = commitList[currentIndex - 1 ]
+         commentLineCountForTestedCommit,sourceLineCountForTestedCommit = getCountsForCommit(hashToCheck2)
+         if commentCountBeforeCommit == commentLineCountForTestedCommit and sourceCountBeforeCommit == sourceLineCountForTestedCommit:
+           return hashToCheck #the commit has been found so return it and stop looping
+       currentIndex = currentIndex + 1 # not sure if this is right but going to test it soon 
+     
+
+
   os.chdir(startingDir)
   if len(matchingLines) == 0:
     print "Error.  Did not find the specific commit"
@@ -32,36 +54,49 @@ commentCountBeforeCommit,sourceCountBeforeCommit):
         break      
   
 
-def buildCommitList(commentCountForCommit,sourceCountForCommit):
-  fin = open("commitList.txt",'r')
-  firstCommit = ""
-  commitList = []
-  matchingLines = []
-  count = 0
-  for commitHash in fin:
-    commitHash = commitHash.rstrip()
-    if firstCommit == "":
-      firstCommit = commitHash
+def getCountsForCommit(hashToCheck):
+  if firstCommit == "":
+    firstCommit = commitHash
     #print "current commit: %s" % (commitHash)
     #print ["git","reset","--hard",commitHash]
     try:
-      subprocess.check_output(["git","reset","--hard",commitHash])
+      subprocess.check_output(["git","reset","--hard",hashToCheck])
       clocOutputByteString = subprocess.check_output(["../../cloc-1.62.pl","."])
       clocOutput = clocOutputByteString.decode(encoding='ascii',errors='strict')
       #print clocOutput
-      for line in clocOutput:
+      for lineCount,line in enumerate,clocOutput:
         if line.startswith("SUM:"):
           currentLineContents = re.split(r'\s{2,}', currentLine)
           #print "items in line"
           commentCount = int(currentLineContents[3])
           sourceCount = int(currentLineContents[4])
-          commitList.append((commitHash,commentCount,sourceCount))
-          if commentCount == commentCountForCommmit and sourceCount == sourceCountForCommit:
-            matchingLines.append(count)
-          count = count + 1
+          return (commentCount,sourceCount)
     except subprocess.CalledProcessError:
       pass
-    subprocess.check_output(["git","reset","--hard",firstCommit])  
+    return None
+
+def buildCommentSourceCountList():
+  fopen = open(dir+"/lineCount.txt")
+  commentSourceList = []
+  for line in fopen:
+    if line.startswith("SUM:"):
+      #print currentLine
+      currentLine = currentLine.strip()
+      currentLineContents = re.split(r'\s{2,}', currentLine)
+      commentLineCount = int(currentLineContents[3])
+      sourceLineCount = int(currentLineContents[4])
+      commentSourceList.append(commentLineCount,sourceLineCount)
+  return commentSourceList
+
+
+
+def buildCommitList():
+      
+  fin = open("commitList.txt",'r')
+  commitList = []
+  for commitHash in fin:
+    commitHash = commitHash.rstrip()
+    commitList.append(commitHash)
   return commitList
 
 if __name__ == "__main__":
