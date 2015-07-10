@@ -21,7 +21,7 @@ commentCountBeforeCommit,sourceCountBeforeCommit):
   #print "current directory: %s" % (os.getcwd())
   commentSourceList = buildCommentSourceCountList()
   targetCommitIndex = commentSourceList.index((commentCountForCommit,sourceCountForCommit))
-  commitList = buildCommitList(commentCountForCommit,sourceCountForCommit)
+  commitList = buildCommitList()
   foundCommit = False
   minIndex = 0
   maxIndex = len(commitList)
