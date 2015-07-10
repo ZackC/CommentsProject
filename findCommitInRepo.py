@@ -73,7 +73,7 @@ def getCountsForCommit(hashToCheck):
           #print "items in line"
           commentCount = int(currentLineContents[3])
           sourceCount = int(currentLineContents[4])
-          return (commentCount,sourceCount)
+          return ((commentCount,sourceCount))
     except subprocess.CalledProcessError:
       pass
     return None
