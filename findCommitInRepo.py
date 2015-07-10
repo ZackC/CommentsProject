@@ -36,9 +36,11 @@ commentCountBeforeCommit,sourceCountBeforeCommit):
          hashToCheck2 = commitList[currentIndex - 1 ]
          commentLineCountForTestedCommit,sourceLineCountForTestedCommit = getCountsForCommit(hashToCheck2)
          if commentCountBeforeCommit == commentLineCountForTestedCommit and sourceCountBeforeCommit == sourceLineCountForTestedCommit:
-           return hashToCheck #the commit has been found so return it and stop looping
+           foundCommit=True
+           
        currentIndex = currentIndex + 1 # not sure if this is right but going to test it soon 
-     
+  os.chdir(startingDir)  
+  return hashToCheck #the commit has been found so return it and stop looping 
 
 
   os.chdir(startingDir)
@@ -76,7 +78,7 @@ def getCountsForCommit(hashToCheck):
     return None
 
 def buildCommentSourceCountList():
-  fopen = open(dir+"/lineCount.txt")
+  fopen = open("/lineCount.txt")
   commentSourceList = []
   for line in fopen:
     if line.startswith("SUM:"):
