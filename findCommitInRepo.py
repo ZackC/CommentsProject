@@ -78,7 +78,7 @@ def getCountsForCommit(hashToCheck):
     return None
 
 def buildCommentSourceCountList():
-  fopen = open("/lineCount.txt")
+  fopen = open("lineCount.txt")
   commentSourceList = []
   for line in fopen:
     if line.startswith("SUM:"):
