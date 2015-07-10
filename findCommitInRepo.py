@@ -88,7 +88,7 @@ def buildCommentSourceCountList():
       currentLineContents = re.split(r'\s{2,}', currentLine)
       commentLineCount = int(currentLineContents[3])
       sourceLineCount = int(currentLineContents[4])
-      commentSourceList.append(commentLineCount,sourceLineCount)
+      commentSourceList.append((commentLineCount,sourceLineCount))
   return commentSourceList
 
 
