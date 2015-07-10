@@ -4,6 +4,7 @@
 
 import os
 import subprocess
+import re
 
 def main(argv=None):
   repositoryName = input('repository name:' )
