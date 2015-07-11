@@ -32,6 +32,7 @@ commentCountBeforeCommit,sourceCountBeforeCommit):
      hashToCheck = commitList[currentIndex]
      countsResult = getCountsForCommit(hashToCheck)
      if countsResult == None:
+       print "Did not find source and comment count!!!!"
        currentIndex = currentIndex + 1 #loop again with index incremented
      else:
        (commentLineCountForTestedCommit,sourceLineCountForTestedCommit) = countsResult
@@ -66,7 +67,7 @@ def getCountsForCommit(hashToCheck):
     subprocess.check_output(["git","reset","--hard",hashToCheck])
     clocOutputByteString = subprocess.check_output(["../../cloc-1.62.pl","."])
     clocOutput = clocOutputByteString.decode(encoding='ascii',errors='strict')
-    #print clocOutput
+    print clocOutput
     for line in clocOutput:
       if line.startswith("SUM:"):
         currentLineContents = re.split(r'\s{2,}', lgine)
