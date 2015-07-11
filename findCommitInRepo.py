@@ -87,6 +87,7 @@ def getCountsForCommit(hashToCheck):
         print "found sum line !!!"
         commentCount = int(currentLineContents[3])
         sourceCount = int(currentLineContents[4])
+        print "sum line contained: %d, %d" % (commentCount,sourceCount0
         return ((commentCount,sourceCount))
   except subprocess.CalledProcessError:
     pass
