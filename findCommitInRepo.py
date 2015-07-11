@@ -16,11 +16,15 @@ def main(argv=None):
      
 def findCommit(repositoryName,commentCountForCommit,sourceCountForCommit,
 commentCountBeforeCommit,sourceCountBeforeCommit):
+  print "find commit args: %s, %d, %d, %d, %d" % (repositoryName,commentCountForCommit,sourceCountForCommit,
+commentCountBeforeCommit,sourceCountBeforeCommit)
   startingDir = os.getcwd()
   os.chdir(repositoryName)
   #print "current directory: %s" % (os.getcwd())
   commentSourceList = buildCommentSourceCountList()
+  printList(commentSourceList,"commentSource.txt")
   targetCommitIndex = commentSourceList.index((commentCountForCommit,sourceCountForCommit))
+  
   commitList = buildCommitList()
   foundCommit = False
   minIndex = 0
@@ -58,6 +62,13 @@ commentCountBeforeCommit,sourceCountBeforeCommit):
       if commitToCheck[1] == commentCountBeforeCommit and commitToCheck[2] == sourceCountBeforeCommit:
         print "the commit is: %s in %s" % (commitList[match][0],repositoryName)
         break      
+
+def printList(listToPrint,filename):
+  fout = open(filename,'w')
+  for item in listToPrint
+    printString = "%s\n" % (str(item))
+    fout.write(printString)
+  fout.close()
   
 
 def getCountsForCommit(hashToCheck):
@@ -92,6 +103,7 @@ def buildCommentSourceCountList():
       commentLineCount = int(currentLineContents[3])
       sourceLineCount = int(currentLineContents[4])
       commentSourceList.append((commentLineCount,sourceLineCount))
+  fopen.close()
   return commentSourceList
 
 
@@ -103,6 +115,7 @@ def buildCommitList():
   for commitHash in fin:
     commitHash = commitHash.rstrip()
     commitList.append(commitHash)
+  fin.close()
   return commitList
 
 if __name__ == "__main__":
