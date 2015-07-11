@@ -27,6 +27,7 @@ commentCountBeforeCommit,sourceCountBeforeCommit):
   maxIndex = len(commitList)
   currentIndex = targetCommitIndex
   while not foundCommit:
+     print "checkingIndex: %d" % (currentIndex)
      hashToCheck = commitList[currentIndex]
      countsResult = getCountsForCommit(hashToCheck)
      if countsResult == None:
