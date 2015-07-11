@@ -68,7 +68,7 @@ def getCountsForCommit(hashToCheck):
     clocOutputByteString = subprocess.check_output(["../../cloc-1.62.pl","."])
     clocOutput = clocOutputByteString.decode(encoding='ascii',errors='strict')
     clocOutput = str(clocOutput)
-    print clocOutput
+    #print clocOutput
     for line in clocOutput.split("\n"):
       #print "|%s|" % (line)
       if line.startswith("SUM:"):
