@@ -67,6 +67,7 @@ def getCountsForCommit(hashToCheck):
     subprocess.check_output(["git","reset","--hard",hashToCheck])
     clocOutputByteString = subprocess.check_output(["../../cloc-1.62.pl","."])
     clocOutput = clocOutputByteString.decode(encoding='ascii',errors='strict')
+    clocOutput = str(clocOutput)
     print clocOutput
     for line in clocOutput:
       print "|%s|" % (line)
