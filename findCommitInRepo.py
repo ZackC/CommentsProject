@@ -26,6 +26,7 @@ commentCountBeforeCommit,sourceCountBeforeCommit):
   minIndex = 0
   maxIndex = len(commitList)
   currentIndex = targetCommitIndex
+  commentSourceListLength = len(commentSourceList)
   while not foundCommit:
      print "checkingIndex: %d" % (currentIndex)
      hashToCheck = commitList[currentIndex]
@@ -35,12 +36,12 @@ commentCountBeforeCommit,sourceCountBeforeCommit):
      else:
        (commentLineCountForTestedCommit,sourceLineCountForTestedCommit) = countsResult
        if commentCountForCommit == commentLineCountForTestedCommit and sourceCountForCommit == sourceLineCountForTestedCommit:
-         hashToCheck2 = commitList[currentIndex - 1 ]
+         hashToCheck2 = commitList[currentIndex - 1]
          commentLineCountForTestedCommit,sourceLineCountForTestedCommit = getCountsForCommit(hashToCheck2)
          if commentCountBeforeCommit == commentLineCountForTestedCommit and sourceCountBeforeCommit == sourceLineCountForTestedCommit:
            foundCommit=True
-           
-       currentIndex = currentIndex + 1 # not sure if this is right but going to test it soon 
+       tempCommentSourceList=commentSourceList[currentIndex+1:commentSourceListLength]
+       currentIndex = tempCommentSourceList.index((commentLineCountForTestedCommit,sourceLineCountForTestedCommit))+currentIndex # not sure if this is right but going to test it soon 
   os.chdir(startingDir)  
   return hashToCheck #the commit has been found so return it and stop looping 
 
