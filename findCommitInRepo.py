@@ -42,7 +42,7 @@ commentCountBeforeCommit,sourceCountBeforeCommit):
          if commentCountBeforeCommit == commentLineCountForTestedCommit and sourceCountBeforeCommit == sourceLineCountForTestedCommit:
            foundCommit=True
        tempCommentSourceList=commentSourceList[currentIndex+1:commentSourceListLength]
-       currentIndex = tempCommentSourceList.index((commentLineCountForTestedCommit,sourceLineCountForTestedCommit))+currentIndex # not sure if this is right but going to test it soon 
+       currentIndex = tempCommentSourceList.index((commentLineCountForTestedCommit,sourceLineCountForTestedCommit))+currentIndex+1 # not sure if this is right but going to test it soon 
   os.chdir(startingDir)  
   return hashToCheck #the commit has been found so return it and stop looping 
 
