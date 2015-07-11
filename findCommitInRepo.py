@@ -69,7 +69,7 @@ def getCountsForCommit(hashToCheck):
     clocOutput = clocOutputByteString.decode(encoding='ascii',errors='strict')
     clocOutput = str(clocOutput)
     print clocOutput
-    for line in clocOutput:
+    for line in clocOutput.split("\n"):
       #print "|%s|" % (line)
       if line.startswith("SUM:"):
         currentLineContents = re.split(r'\s{2,}', line)
