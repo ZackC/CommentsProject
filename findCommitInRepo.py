@@ -70,8 +70,8 @@ def getCountsForCommit(hashToCheck):
     print clocOutput
     for line in clocOutput:
       if line.startswith("SUM:"):
-        currentLineContents = re.split(r'\s{2,}', lgine)
-        #print "items in line"
+        currentLineContents = re.split(r'\s{2,}', line)
+        print "found sum line !!!"
         commentCount = int(currentLineContents[3])
         sourceCount = int(currentLineContents[4])
         return ((commentCount,sourceCount))
