@@ -65,8 +65,8 @@ commentCountBeforeCommit,sourceCountBeforeCommit)
 
 def printList(listToPrint,filename):
   fout = open(filename,'w')
-  for item in listToPrint:
-    printString = "%s\n" % (str(item))
+  for index,item in enumerate(listToPrint):
+    printString = "%d: %s\n" % (index,str(item))
     fout.write(printString)
   fout.close()
   
