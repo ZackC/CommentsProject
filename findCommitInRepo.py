@@ -48,6 +48,7 @@ commentCountBeforeCommit,sourceCountBeforeCommit)
            print "second commit matched"
            foundCommit=True
        if not foundCommit:
+         print "found commit:  %s" % (foundCommit)
          tempCommentSourceList=commentSourceList[currentIndex+1:commentSourceListLength]
          currentIndex = tempCommentSourceList.index((commentLineCountForTestedCommit,sourceLineCountForTestedCommit))+currentIndex+1 # not sure if this is right but going to test it soon 
   os.chdir(startingDir)  
