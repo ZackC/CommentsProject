@@ -41,9 +41,11 @@ commentCountBeforeCommit,sourceCountBeforeCommit)
      else:
        (commentLineCountForTestedCommit,sourceLineCountForTestedCommit) = countsResult
        if commentCountForCommit == commentLineCountForTestedCommit and sourceCountForCommit == sourceLineCountForTestedCommit:
+         print "first commit matched"
          hashToCheck2 = commitList[currentIndex - 1]
          commentLineCountForTestedCommit,sourceLineCountForTestedCommit = getCountsForCommit(hashToCheck2)
          if commentCountBeforeCommit == commentLineCountForTestedCommit and sourceCountBeforeCommit == sourceLineCountForTestedCommit:
+           print "second commit matched"
            foundCommit=True
        tempCommentSourceList=commentSourceList[currentIndex+1:commentSourceListLength]
        currentIndex = tempCommentSourceList.index((commentLineCountForTestedCommit,sourceLineCountForTestedCommit))+currentIndex+1 # not sure if this is right but going to test it soon 
