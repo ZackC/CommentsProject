@@ -46,12 +46,16 @@ commentCountBeforeCommit,sourceCountBeforeCommit)
          commentLineCountForTestedCommit,sourceLineCountForTestedCommit = getCountsForCommit(hashToCheck2)
          if commentCountBeforeCommit == commentLineCountForTestedCommit and sourceCountBeforeCommit == sourceLineCountForTestedCommit:
            print "second commit matched"
-           os.chdir(startingDir)  
-           return hashToCheck #the commit has been found so return it and stop looping 
+           foundCommit=True
        if not foundCommit:
          print "found commit:  %s" % (foundCommit)
          tempCommentSourceList=commentSourceList[currentIndex+1:commentSourceListLength]
-         currentIndex = tempCommentSourceList.index((commentLineCountForTestedCommit,sourceLineCountForTestedCommit))+currentIndex+1 # not sure if this is right but going to test it soon 
+         try:
+           currentIndex = tempCommentSourceList.index((commentLineCountForTestedCommit,sourceLineCountForTestedCommit))+currentIndex+1 # not sure if this is right but going to test it soon
+         except ValueError:
+           print "going backwards"
+           tempPos =  commentSourceList.index((commentLineCountForTestedCommit,sourceLineCountForTestedCommit))
+           currentIndex = tempPos
   os.chdir(startingDir)  
   return hashToCheck #the commit has been found so return it and stop looping 
 
