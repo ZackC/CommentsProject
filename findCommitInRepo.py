@@ -105,6 +105,7 @@ def buildCommentSourceCountList():
       sourceLineCount = int(currentLineContents[4])
       commentSourceList.append((commentLineCount,sourceLineCount))
   fopen.close()
+  commentSourceList.reverse()
   return commentSourceList
 
 
