@@ -42,7 +42,7 @@ commentCountBeforeCommit,sourceCountBeforeCommit)
        (commentLineCountForTestedCommit,sourceLineCountForTestedCommit) = countsResult
        if commentCountForCommit == commentLineCountForTestedCommit and sourceCountForCommit == sourceLineCountForTestedCommit:
          print "first commit matched"
-         hashToCheck2 = commitList[currentIndex - 1]
+         hashToCheck2 = commitList[currentIndex + 1]
          commentLineCountForTestedCommit,sourceLineCountForTestedCommit = getCountsForCommit(hashToCheck2)
          if commentCountBeforeCommit == commentLineCountForTestedCommit and sourceCountBeforeCommit == sourceLineCountForTestedCommit:
            print "second commit matched"
