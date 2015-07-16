@@ -5,13 +5,15 @@
 
 #dirList=`ls -d -- */ | tail -n 78`
 dirList=`ls -d -- */`
+outputFile="lineCountWithCommits.txt"
 for dir in ${dirList[@]}
 do
   cd $dir
   echo "starting on $dir"
-  echo "" > lineCount.txt
-  git log > logResult.txt
-  python ../../getCommits.py logResult.txt > commitList.txt
+  echo "" > $outputFile
+  #removing lines that don't need ot be executed the second time through
+  #git log > logResult.txt
+  #python ../../getCommits.py logResult.txt > commitList.txt
   firstCommit=""
   while read line
   do
@@ -20,9 +22,9 @@ do
       firstCommit=$line
     fi
     git reset --hard $line
-    echo "current commit: $line" >> lineCount.txt
-    ../../cloc-1.62.pl . >> lineCount.txt
-    echo "=======================" >> lineCount.txt 
+    echo "current commit: $line" >> $outputFile
+    ../../cloc-1.62.pl . >> $outputFile
+    echo "=======================" >> $outputFile 
   done < commitList.txt
   git reset --hard $firstCommit
   cd ..
