@@ -44,9 +44,9 @@ def main(argv):
             #print "found added or deleted file line"
             inNewOrDeletedFile = True
           else:
-              '''TODO: remove false positives for websites in comments'''
-              singleLineComment = line.find('//')
-              if singleLineComment != -1:
+            '''TODO: remove false positives for websites in comments'''
+            singleLineComment = line.find('//')
+            if singleLineComment != -1:
               #print "!!!!!found a single line comment"
               if inNewOrDeletedFile:
                 #print "found a single line comment not in a new or deleted file"
@@ -56,8 +56,8 @@ def main(argv):
               if newFile != -1:
                 #print "found a new file diff"
                 inNewOrDeletedFile = False
-                print "total comment count in new and old files: %d" % (commentCountInNewAndDeletedFiles)
-
+                #print "total comment count in new and old files: %d" % (commentCountInNewAndDeletedFiles)
+    print "total comment count in new and old files: %d" % (commentCountInNewAndDeletedFiles)
 
 if __name__ == "__main__":
   main(sys.argv)
