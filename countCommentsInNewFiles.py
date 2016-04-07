@@ -16,24 +16,24 @@ def main(argv):
     inComment=False
     for lineCount,line in enumerate(fin):
       line=line.rstrip()
-      print "%s" % (line)
+      #print "%s" % (line)
       startOfComment = line.find("/*")
       if startOfComment != -1:
         commentStartLine = lineCount
-        print "found start of comment"
+       #print "found start of comment"
         inComment=True
       else:
         endOfComment = line.find("*/")
         if endOfComment != -1 and inComment:
           commentEndLine = lineCount
-          print "found end of comment"
+          #print "found end of comment"
           if inNewOrDeletedFile:
-            dedentedText=textwrap.dedent("""
-                                    !!!!!found end of comment when in a new
-                                    or deleted file with
-                                    size: %d""" %
-                                        (commentEndLine-commentStartLine+1)).strip()
-            print textwrap.fill(dedentedText,80)
+            #dedentedText=textwrap.dedent("""
+            #                        !!!!!found end of comment when in a new
+            #                        or deleted file with
+            #                        size: %d""" %
+            #                            (commentEndLine-commentStartLine+1)).strip()
+            #print textwrap.fill(dedentedText,80)
             commentCountInNewAndDeletedFiles=commentEndLine-commentStartLine+1+commentCountInNewAndDeletedFiles
           commentStartLine=-1
           commentEndLine=-1
@@ -41,20 +41,20 @@ def main(argv):
         else:
           licenseSearchResult= line.find('/dev/null')
           if licenseSearchResult != -1:
-            print "found added or deleted file line"
+            #print "found added or deleted file line"
             inNewOrDeletedFile = True
           else:
               '''TODO: remove false positives for websites in comments'''
               singleLineComment = line.find('//')
               if singleLineComment != -1:
-              print "!!!!!found a single line comment"
+              #print "!!!!!found a single line comment"
               if inNewOrDeletedFile:
-                print "found a single line comment not in a new or deleted file"
+                #print "found a single line comment not in a new or deleted file"
                 commentCountInNewAndDeletedFiles = commentCountInNewAndDeletedFiles + 1
             else:
               newFile = line.find('dif --git')
               if newFile != -1:
-                print "found a new file diff"
+                #print "found a new file diff"
                 inNewOrDeletedFile = False
                 print "total comment count in new and old files: %d" % (commentCountInNewAndDeletedFiles)
 

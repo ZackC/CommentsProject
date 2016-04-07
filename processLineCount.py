@@ -58,8 +58,16 @@ def main(argv=None):
               colonIndex=licenseLineResult.find(":")
               licenseLineCount=licenseLineResult[colonIndex+1:len(licenseLineResult)]
               licenseLineCount=int(licenseLineCount)
-            
-              if relativeChange > minChange and commentCount - oldCommentCount - licenseLineCount > 50:
+              newFileResult=subprocess.check_output(["python","../../countCommentsInNewFiles.py","gitDiffResult.txt"])
+              newFileResult=newFileResult.rstrip();
+              colonIndex=newFileResult.find("L")
+              newFileCommentCount=newFileResult[colonIndex+1:len(newFileResult)]
+              newFileCommentCount=int(newFileCommentCount)
+              #TODO: by subtracting licenseLineCount and newFileCommentCount you 
+              #are substracting double for license comments in new files
+              #this is fine for now with the initial pass of the data but you
+              #should improve this later
+              if relativeChange > minChange and commentCount - oldCommentCount - licenseLineCount - newFileCommentCount > 50:
                 print "change in: "+os.getcwd()+"/"+sys.argv[1]
                 print "new commit: %s" % (commitName)
                 print "old commit: %s" % (previousCommitName)
