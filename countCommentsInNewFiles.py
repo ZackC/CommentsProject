@@ -2,7 +2,7 @@
 
 import sys
 import re
-
+import textwrap
 
 def main(argv):
   if len(argv) != 2:
@@ -12,32 +12,51 @@ def main(argv):
     inNewOrDeletedFile = False
     commentStartLine = -1
     commentEndLine = -1
-    totalLicenseCount = 0 
+    commentCountInNewAndDeletedFiles = 0
+    inComment=False
     for lineCount,line in enumerate(fin):
+      line=line.rstrip()
+      print "%s" % (line)
       startOfComment = line.find("/*")
       if startOfComment != -1:
         commentStartLine = lineCount
+        print "found start of comment"
+        inComment=True
       else:
         endOfComment = line.find("*/")
-        if endOfComment != -1 and startOfComment != -1:
+        if endOfComment != -1 and inComment:
           commentEndLine = lineCount
+          print "found end of comment"
           if inNewOrDeletedFile:
-            totalLicenseCount=commentEndLine-commentStartLine+1+totalLicenseCount
+            dedentedText=textwrap.dedent("""
+                                    !!!!!found end of comment when in a new
+                                    or deleted file with
+                                    size: %d""" %
+                                        (commentEndLine-commentStartLine+1)).strip()
+            print textwrap.fill(dedentedText,80)
+            commentCountInNewAndDeletedFiles=commentEndLine-commentStartLine+1+commentCountInNewAndDeletedFiles
           commentStartLine=-1
-          commentEndLine=-1                
+          commentEndLine=-1
+          inComment=False
         else:
-          licenseSearchResult= line.find('/dev/null',line)
-          if licenseSearchResult != None:
+          licenseSearchResult= line.find('/dev/null')
+          if licenseSearchResult != -1:
+            print "found added or deleted file line"
             inNewOrDeletedFile = True
           else:
-            singleLineComment = line.find('//',line)
-            if singleLineComment != None:
-              totalLicenseCount = totalLicenseCount + 1 
+              '''TODO: remove false positives for websites in comments'''
+              singleLineComment = line.find('//')
+              if singleLineComment != -1:
+              print "!!!!!found a single line comment"
+              if inNewOrDeletedFile:
+                print "found a single line comment not in a new or deleted file"
+                commentCountInNewAndDeletedFiles = commentCountInNewAndDeletedFiles + 1
             else:
-              newFile = line.find('dif --git',line)  
-              if newFile != None:
+              newFile = line.find('dif --git')
+              if newFile != -1:
+                print "found a new file diff"
                 inNewOrDeletedFile = False
-    print "total license line count: %d" % (totalLicenseCount)
+                print "total comment count in new and old files: %d" % (commentCountInNewAndDeletedFiles)
 
 
 if __name__ == "__main__":
